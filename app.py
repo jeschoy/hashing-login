@@ -23,7 +23,11 @@ def root():
 
 @app.route('/secret', methods=["GET"])
 def secret():
-  return render_template('secret.html')
+  if 'username' in session:
+    return render_template('secret.html')
+  else:
+    flash('Please login/register to visit page!', 'danger')
+    return redirect('/login')
 
 @app.route('/logout')
 def logout():
